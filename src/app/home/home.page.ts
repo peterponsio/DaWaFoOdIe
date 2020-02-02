@@ -45,4 +45,28 @@ export class HomePage implements OnInit {
  
   }
 
+/////////////////////////////Google Login/////////////////////////////////////////////
+  Login_google(){
+
+    this.aut.G_log()
+         .then((datos) => {
+
+           console.log(datos);
+           this.visuSer.presentToast("Log with Google done");
+           this.ruta.navigateByUrl("/tabs");
+
+         }).catch(error => {
+
+           console.log(error);
+           this.visuSer.presentToast("Failed to log in whit Google try again");
+
+         });
+
+
+
+
+  }
+
+
+
 }

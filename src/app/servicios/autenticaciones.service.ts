@@ -56,11 +56,11 @@ export class AutenticacionesService {
    
     var provider = new firebase.auth.FacebookAuthProvider();
 
-   return firebase.auth().signInWithRedirect(provider)
+   return firebase.auth().signInWithPopup(provider)
     .then(function (result) {
 
       console.log(result);
-      
+      this.ruta.navigateByUrl("/tabs");
 
     }).catch(function (error) {
       // Handle Errors here.
@@ -73,11 +73,31 @@ export class AutenticacionesService {
       // ...
     });
     
-
+   
   }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   G_log(){
+
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+
+    return firebase.auth().signInWithPopup(provider)
+      .then(function (result) {
+
+        console.log(result);
+        this.ruta.navigateByUrl("/tabs");
+
+      }).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
 
   }
 

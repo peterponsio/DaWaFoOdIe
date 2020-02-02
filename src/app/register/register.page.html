@@ -1,9 +1,83 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button color="warning" text="" icon="arrow-round-back">
+      </ion-back-button>
+    </ion-buttons>
+
+
 </ion-header>
 
-<ion-content>
+<ion-content class="main">
+
+  <ion-card>
+    <ion-card-content>
+      <img class="main_img" src="./assets/dawafoodie.png">
+    </ion-card-content>
+  </ion-card>
+
+   <ion-card>
+     <ion-card-content class="botones">
+
+       <ion-item>
+         <ion-label position="floating">Name</ion-label>
+         <ion-input type="text" [(ngModel)]="name"></ion-input>
+       </ion-item>
+
+       <p>{{gname}}</p>
+
+
+
+       <ion-item>
+         <ion-label position="floating">Email</ion-label>
+         <ion-input type="mail" [(ngModel)]="email"></ion-input>
+
+       </ion-item>
+
+       <p>{{gmail}}</p>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password1"></ion-input>
+
+        </ion-item>
+
+          <p>{{gpass1}}</p>
+
+         <ion-item>
+           <ion-label position="floating">Repeat Password</ion-label>
+           <ion-input type="password" [(ngModel)]="password2"></ion-input>
+
+         </ion-item>
+
+           <p>{{gpass2}}</p>
+
+
+       <p>{{gall}}</p>
+
+       
+
+
+     </ion-card-content>
+
+
+
+   </ion-card>
+
+
+   <ion-card>
+     <ion-card-content class="botones">
+
+       <ion-button class="info_text" shape="round" color="warning" (click)="Reg()">Create Account</ion-button>
+
+
+     </ion-card-content>
+
+   </ion-card>
+
+
+
+
+
 
 </ion-content>

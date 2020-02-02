@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Route } from '@angular/compiler/src/core';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(private ruta: Router) { }
 
   ngOnInit() {
+  }
+
+  Login(){
+      this.ruta.navigateByUrl("login")
+  }
+
+  Create_Account(){
+    this.ruta.navigateByUrl("register")
+
   }
 
 }

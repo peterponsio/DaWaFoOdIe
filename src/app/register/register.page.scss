@@ -1,0 +1,31 @@
+.titulo {
+    font-size: large;
+    font-weight: 900;
+    text-align: center;
+    color: orange;
+    margin-top: 1em;
+}
+
+.main_img {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.main ion-card {
+    margin-top: 1.8em;
+}
+
+.botones {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.botones * {
+    display: block;
+}
+
+.info_tetx {
+    align-content: center;
+    text-align: center;
+    font: 2em sans-serif;
+}

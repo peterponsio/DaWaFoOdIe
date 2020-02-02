@@ -56,7 +56,7 @@ export class AutenticacionesService {
    
     var provider = new firebase.auth.FacebookAuthProvider();
 
-   return firebase.auth().signInWithPopup(provider)
+   return firebase.auth().signInWithRedirect(provider)
     .then(function (result) {
 
       console.log(result);
@@ -92,9 +92,7 @@ export class AutenticacionesService {
         throw new Error(error);
       });
 
-
   }
-
 
   //////////////////////////////////////////Fortgot password////////////////////////////////////////////////////////////
 

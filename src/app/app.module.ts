@@ -14,28 +14,33 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
+import { Facebook} from '@ionic-native/facebook';
 
 import { from } from 'rxjs';
 import { firebaseConfig } from 'src/environments/environment';
+
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,
+  BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
+   
     AngularFireAuthModule,
     AngularFirestoreModule,
+  
 
   ],
   providers: [
     StatusBar,
     SplashScreen,
+   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { } 

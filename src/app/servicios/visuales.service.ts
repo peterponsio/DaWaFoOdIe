@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { AutenticacionesService } from './autenticaciones.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VisualesService {
 
-  constructor(private alert: AlertController, public toastController: ToastController ) { }
+  constructor(private alert: AlertController, public toastController: ToastController , private aut:AutenticacionesService) { }
 
 
   //////////////Toast////////////////////////////////////////
@@ -14,7 +15,7 @@ export class VisualesService {
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 3000
+      duration: 5000
     });
     toast.present();
   }
@@ -62,5 +63,46 @@ export class VisualesService {
     await alert.present();
   }
 
+
+
+///////////////////////////////Alert to recover password///////////////////////////////////////////////////////////////////
+
+
+  async Forgot_pass() {
+
+    const alert = await this.alert.create({
+      header: 'recover password',
+      inputs: [
+        {
+          name: 'mail',
+          type: 'text',
+          placeholder: 'Put you mail'
+        },
+  
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (datos) => {
+
+            this.presentToast("Check your email to change the password");
+
+            this.aut.fortgot(datos.mail);
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+////////////////////////////////////////////////////////////////////////////////////////////////
  
 }

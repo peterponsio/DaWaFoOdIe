@@ -1,5 +1,8 @@
 import { AutenticacionesService } from './../servicios/autenticaciones.service';
 import { Component, OnInit } from '@angular/core';
+import { VisualesService } from './../servicios/visuales.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +21,7 @@ export class LoginPage implements OnInit {
 
   
 
-  constructor(private auSer: AutenticacionesService) { 
+  constructor(private auSer: AutenticacionesService, private visuSer: VisualesService, private ruta: Router) { 
 
     this.mail="";
     this.password="";
@@ -52,8 +55,39 @@ export class LoginPage implements OnInit {
       this.password = "";
       
     }else{
-          this.auSer.Log_in(this.mail,this.password);
+          this.auSer.Log_in(this.mail,this.password)
+            .then((datos) => {
+
+              console.log(datos);
+
+              this.ruta.navigateByUrl("/tabs");
+
+
+            }).catch(error => {
+
+              console.log(error);
+              this.visuSer.presentToast("Failed to Log-in");
+
+            });
       }
+  }
+
+  Forgot(){
+
+    this.visuSer.Forgot_pass()
+      .then((datos) => {
+
+        
+        this.visuSer.presentToast("Try to log in again");
+
+
+      }).catch(error => {
+
+        console.log(error);
+        this.visuSer.presentToast("Failed to Reset your password try again");
+
+      });
+
   }
 
 

@@ -2,6 +2,8 @@ import { Users } from './../model/user.interface';
 import { AutenticacionesService } from './../servicios/autenticaciones.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'firebase';
+import { VisualesService } from './../servicios/visuales.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +32,7 @@ export class RegisterPage implements OnInit {
   }
 
 
-  constructor(private auSer:AutenticacionesService) { 
+  constructor(private auSer: AutenticacionesService, private visuSer: VisualesService, private ruta: Router) { 
 
     this.name = "";
     this.email = "";
@@ -95,12 +97,27 @@ export class RegisterPage implements OnInit {
       this.gpass2 = "";
       this.gname = "Fill the user name please";
 
-    }else{
+    }else if( this.password2==this.password2){
       this.newUser.id="";
       this.newUser.name=this.name;
       this.newUser.mail=this.email;
       this.newUser.password=this.password1;
-      this.auSer.CreateUser(this.newUser);
+      
+      this.auSer.CreateUser(this.newUser)
+        .then((datos) => {
+         
+          console.log(datos);
+          
+          this.ruta.navigateByUrl("/tabs");
+
+        }).catch(error => {
+
+          console.log(error);
+          this.visuSer.presentToast("Failed to create");
+
+        });
+
+
     }
   }
 

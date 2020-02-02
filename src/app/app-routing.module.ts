@@ -8,11 +8,6 @@ const routes: Routes = [
   },
   
   {
-    path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -23,7 +18,14 @@ const routes: Routes = [
   {
     path: 'restaurant-info',
     loadChildren: () => import('./restaurant-info/restaurant-info.module').then( m => m.RestaurantInfoPageModule)
-  }
+  },
+
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+
+
 ];
 @NgModule({
   imports: [

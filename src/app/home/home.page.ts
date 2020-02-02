@@ -53,7 +53,10 @@ export class HomePage implements OnInit {
 
            console.log(datos);
            this.visuSer.presentToast("Log with Google done");
-           this.ruta.navigateByUrl("/tabs");
+          
+          this.ruta.navigateByUrl("/tabs");
+
+          
 
          }).catch(error => {
 

@@ -51,7 +51,7 @@ export class AutenticacionesService {
 
   //////////////////////////////////Login with facebook///////////////////////////////////////////////////////////
 
-  F_log(){
+   async F_log(){
 
    
     var provider = new firebase.auth.FacebookAuthProvider();
@@ -60,7 +60,7 @@ export class AutenticacionesService {
     .then(function (result) {
 
       console.log(result);
-      this.ruta.navigateByUrl("/tabs");
+     
 
     }).catch(function (error) {
       // Handle Errors here.
@@ -77,29 +77,24 @@ export class AutenticacionesService {
   }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  G_log(){
+  async G_log(){
 
     var provider = new firebase.auth.GoogleAuthProvider();
 
 
-    return firebase.auth().signInWithPopup(provider)
-      .then(function (result) {
+    return firebase.auth().signInWithRedirect(provider)
+      .then((data) => {
+        console.log(data);
+        
+      }).catch(error => {
 
-        console.log(result);
-        this.ruta.navigateByUrl("/tabs");
-
-      }).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
+        console.log(error);
+        throw new Error(error);
       });
 
+
   }
+
 
   //////////////////////////////////////////Fortgot password////////////////////////////////////////////////////////////
 
@@ -116,7 +111,6 @@ export class AutenticacionesService {
       });
 
   }
-
 
 
 }

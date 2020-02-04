@@ -14,7 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { Facebook} from '@ionic-native/facebook';
+import { Facebook,FacebookLoginResponse} from '@ionic-native/facebook/ngx';
 
 import { from } from 'rxjs';
 import { firebaseConfig } from 'src/environments/environment';
@@ -29,7 +29,7 @@ import { firebaseConfig } from 'src/environments/environment';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-   
+    
     AngularFireAuthModule,
     AngularFirestoreModule,
   
@@ -38,7 +38,7 @@ import { firebaseConfig } from 'src/environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-   
+    Facebook,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

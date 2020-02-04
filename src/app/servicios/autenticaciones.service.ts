@@ -1,10 +1,10 @@
 import { Users } from './../model/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
-import { Facebook } from '@ionic-native/facebook'
 import * as firebase from 'firebase';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 
 
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class AutenticacionesService {
 
 
-  constructor(private aut: AngularFireAuth,private ruta:Router) { }
+  constructor(private aut: AngularFireAuth,private ruta:Router,private fb: Facebook) { }
 
 ////////////////////////////// Login ///////////////////////////////////////////////////////////////
 
@@ -54,25 +54,12 @@ export class AutenticacionesService {
    async F_log(){
 
    
-    var provider = new firebase.auth.FacebookAuthProvider();
-
-   return firebase.auth().signInWithRedirect(provider)
-    .then(function (result) {
-
-      console.log(result);
-     
-
-    }).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
-    
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+    .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
+    .catch(e => console.log('Error logging into Facebook', e));
+  
+  
+    this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
    
   }
 

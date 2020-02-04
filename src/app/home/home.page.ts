@@ -20,6 +20,13 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
    
+
+    if(localStorage.getItem("Inicio")){
+      localStorage.removeItem("Inicio");
+       this.ruta.navigateByUrl("/tabs");
+     
+   }
+
     firebase.auth().getRedirectResult().
     then(function (result) {
       if (result.credential) {

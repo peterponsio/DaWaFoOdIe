@@ -21,35 +21,9 @@ export class HomePage implements OnInit {
   ngOnInit() {
    
 
-    if(localStorage.getItem("Inicio")){
-      localStorage.removeItem("Inicio");
-       this.ruta.navigateByUrl("/tabs");
-     
-   }
-
-    firebase.auth().getRedirectResult().
-    then(function (result) {
-      if (result.credential) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        console.log("dasdasd");
-        localStorage.setItem("Inicio","ok");
-      }
-      
-      // The signed-in user info.
-      var user = result.user;
-    }).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
-      
-    if(localStorage.getItem("Inicio")){
-       localStorage.removeItem("Inicio");
+  
+    if(localStorage.getItem("log")){
+       localStorage.removeItem("log");
         this.ruta.navigateByUrl("/tabs");
       
     }

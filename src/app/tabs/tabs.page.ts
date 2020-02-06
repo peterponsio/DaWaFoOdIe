@@ -7,6 +7,14 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  menuOpen:boolean;
+
+  constructor() {
+
+   
+
+  }
+
+ 
 
 }

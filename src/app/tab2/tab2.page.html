@@ -14,7 +14,7 @@
 <ion-content>
 
 
-  <ion-menu side="end" type="push" menuId="filtros" >
+  <ion-menu side="end" type="push" menuId="filtros2" >
     <ion-header>
       <ion-toolbar color="danger">
         <ion-title>More Filters</ion-title>
@@ -80,10 +80,16 @@
 
    </ion-card>
 
-   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onClickAddRestaurant()">
+   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="settings"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="top" (click)="onClickPerfil()">
+      <ion-fab-button><ion-icon name="person"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start" (click)="onClickAddRestaurant()">
+      <ion-fab-button><ion-icon name="add"></ion-icon></ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
   
 </ion-content>

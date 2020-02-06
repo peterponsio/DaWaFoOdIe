@@ -9,30 +9,40 @@ import { MenuController } from '@ionic/angular';
 })
 export class Tab2Page {
 
-  menuOpen:boolean;
+  menuOpen1:boolean=false;
 
   constructor(private ruta: Router,private menu: MenuController) {
 
-    this.menuOpen=false;
+    this.menuOpen1=false;
 
+    
   }
-
-
+  ngOnInit(){
+    this.menuOpen1=false;
+  }
 
   onClose(){
     this.ruta.navigateByUrl("home");
   }
 
   onFilter(){
-    if(this.menuOpen){
-      this.menu.close("filtros");
-      this.menuOpen=false;
+    if(this.menuOpen1){
+      this.menu.close("filtros2");
+      this.menuOpen1=false;
+      console.log(this.menuOpen1);
+    }else if(this.menuOpen1==false){
+      this.menu.open("filtros2");
+      this.menuOpen1=true;
+      console.log(this.menuOpen1);
     }else{
-      this.menu.open("filtros");
-      this.menuOpen=true;
+      this.menuOpen1=false;
+      console.log(this.menuOpen1);
     }
   }
-  
+
+
+ 
+
   onClickInfo(){
     this.ruta.navigateByUrl("restaurant-info");
   }

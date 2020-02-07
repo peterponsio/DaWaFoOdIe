@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { VisualesService } from './../servicios/visuales.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { Users } from '../model/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,14 @@ export class LoginPage implements OnInit {
 
   mail:string;
   password:string;
+
+  newUser:Users={
+    id:"",
+    name:"",
+    mail:"",
+    password:"",
+    restaurants:"",
+  }
 
   
 
@@ -55,12 +64,19 @@ export class LoginPage implements OnInit {
       this.password = "";
       
     }else{
-          this.auSer.Log_in(this.mail,this.password)
+
+      this.newUser.id="";
+      this.newUser.mail=this.mail;
+      this.newUser.password=this.password;
+
+          this.auSer.Log_in(this.newUser)
             .then((datos) => {
 
               console.log(datos);
 
               this.ruta.navigateByUrl("/tabs");
+
+              
 
 
             }).catch(error => {

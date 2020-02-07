@@ -1,4 +1,6 @@
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Users } from './../model/user.interface';
+
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
@@ -14,15 +16,20 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 export class AutenticacionesService {
 
 
-  constructor(private aut: AngularFireAuth,private ruta:Router,private fb: Facebook) { }
+  constructor(private aut: AngularFireAuth,private ruta:Router,private fb: Facebook,private db:AngularFirestore) { }
 
 ////////////////////////////// Login ///////////////////////////////////////////////////////////////
 
- async Log_in(mail: string, password: string){
+ async Log_in(newUser:Users){
 
-    return this.aut.auth.signInWithEmailAndPassword(mail, password)
+    return this.aut.auth.signInWithEmailAndPassword(newUser.mail, newUser.password)
 
       .then((credential: firebase.auth.UserCredential) => {
+
+        localStorage.setItem("user_id",credential.user.uid);
+
+        console.log(credential.user.uid);
+
         
       }).catch(error => {
         console.log(error);
@@ -34,12 +41,30 @@ export class AutenticacionesService {
 /////////////////////////////Create User///////////////////////////////////////////////////////////////
 
 
-  CreateUser(newUser:Users){
+newUser:Users={
 
-    return this.aut.auth.createUserWithEmailAndPassword(newUser.mail, newUser.password)
+  id:"",
+  name:"",
+  mail:"",
+  password:"",
+  restaurants:"",
+
+ }
+
+  CreateUser(newUserData:Users){
+
+    return this.aut.auth.createUserWithEmailAndPassword(newUserData.mail, newUserData.password)
       .then((credential: firebase.auth.UserCredential) => {
 
-       
+        this.newUser.id=this.db.createId();
+        this.newUser.name=newUserData.name;
+        this.newUser.mail=newUserData.mail;
+        this.newUser.restaurants=newUserData.restaurants;
+        
+
+        this.db.doc("/users/"+this.newUser.id ).set(this.newUser);
+
+        localStorage.setItem("user_id",this.newUser.id);
       
       }).catch(error => {
 

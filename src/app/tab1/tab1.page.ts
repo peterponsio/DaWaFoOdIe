@@ -1,3 +1,4 @@
+import { ConexionesService } from './../servicios/conexiones.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
@@ -11,7 +12,7 @@ export class Tab1Page {
 
   menuOpen1:boolean=false;
 
-  constructor(private ruta: Router,private menu: MenuController) {
+  constructor(private ruta: Router,private menu: MenuController,private conexion:ConexionesService) {
 
     this.menuOpen1=false;
 
@@ -42,6 +43,10 @@ export class Tab1Page {
 
   onClickInfo(){
     this.ruta.navigateByUrl("restaurant-info");
+  }
+
+  onClickAddRestaurant(){
+    this.conexion.Add();
   }
 
 }

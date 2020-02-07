@@ -28,7 +28,7 @@ export class RegisterPage implements OnInit {
     name:"",
     mail:"",
     password:"",
-    
+    restaurants:"",
   }
 
 
@@ -101,7 +101,7 @@ export class RegisterPage implements OnInit {
       this.newUser.id="";
       this.newUser.name=this.name;
       this.newUser.mail=this.email;
-      this.newUser.password=this.password1;
+    
       
       this.auSer.CreateUser(this.newUser)
         .then((datos) => {

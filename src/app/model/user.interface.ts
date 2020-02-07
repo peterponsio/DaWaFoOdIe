@@ -3,5 +3,5 @@ export interface Users {
     mail: string;
     name: string;
     password: string;
-
+    restaurants:"",
 }

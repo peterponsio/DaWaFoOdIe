@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { AlertController, ToastController, PopoverController, ModalController } from '@ionic/angular';
 import { AutenticacionesService } from './autenticaciones.service';
-
+import { ModalPagePage } from '../modal-page/modal-page.page';
 @Injectable({
   providedIn: 'root'
 })
 export class VisualesService {
 
-  constructor(private alert: AlertController, public toastController: ToastController , private aut:AutenticacionesService) { }
+  constructor(public modalController: ModalController,private alert: AlertController, public toastController: ToastController , private aut:AutenticacionesService) { }
 
 
   //////////////Toast////////////////////////////////////////
@@ -104,5 +105,32 @@ export class VisualesService {
     await alert.present();
   }
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+async presentModalAdd() {
+  const modal = await this.modalController.create({
+   
+    component: ModalPagePage,
+    
+    
+    
+    componentProps: {
+      'firstName': 'Douglas',
+      'lastName': 'Adams',
+      'middleInitial': 'N'
+      
+    },
+
+    
+  
+
+  });
+  modal.showBackdrop;
+  return await modal.present();
+
+  
+}
+
+
  
 }

@@ -51,7 +51,9 @@ newUser:Users={
 
  }
 
-  CreateUser(newUserData:Users){
+  CreateUser(newUserData){
+
+    console.log(newUserData);
 
     return this.aut.auth.createUserWithEmailAndPassword(newUserData.mail, newUserData.password)
       .then((credential: firebase.auth.UserCredential) => {

@@ -98,9 +98,11 @@ export class RegisterPage implements OnInit {
       this.gname = "Fill the user name please";
 
     }else if( this.password2==this.password2){
+     
       this.newUser.id="";
       this.newUser.name=this.name;
       this.newUser.mail=this.email;
+      this.newUser.password=this.password2;
     
       
       this.auSer.CreateUser(this.newUser)

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -18,12 +18,22 @@ import { Facebook,FacebookLoginResponse} from '@ionic-native/facebook/ngx';
 
 import { from } from 'rxjs';
 import { firebaseConfig } from 'src/environments/environment';
+import { ModalPagePage } from './modal-page/modal-page.page';
+
 
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,
+  
+    ModalPagePage,
+  
+  ],
+  entryComponents: [
+
+    ModalPagePage,
+
+  ],
   imports: [
   BrowserModule,
     IonicModule.forRoot(),
@@ -32,13 +42,15 @@ import { firebaseConfig } from 'src/environments/environment';
     
     AngularFireAuthModule,
     AngularFirestoreModule,
-  
+   
 
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Facebook,
+    
+    
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

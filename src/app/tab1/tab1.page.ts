@@ -2,6 +2,8 @@ import { ConexionesService } from './../servicios/conexiones.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { VisualesService } from '../servicios/visuales.service';
+import { ModalPagePage } from '../modal-page/modal-page.page';
 
 @Component({
   selector: 'app-tab1',
@@ -12,7 +14,7 @@ export class Tab1Page {
 
   menuOpen1:boolean=false;
 
-  constructor(private ruta: Router,private menu: MenuController,private conexion:ConexionesService) {
+  constructor(private ruta: Router,private menu: MenuController,private conexion:ConexionesService,private visual:VisualesService) {
 
     this.menuOpen1=false;
 
@@ -46,7 +48,8 @@ export class Tab1Page {
   }
 
   onClickAddRestaurant(){
-    this.conexion.Add();
+    this.visual.presentModalAdd();
   }
+
 
 }

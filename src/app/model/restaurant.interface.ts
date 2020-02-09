@@ -1,9 +1,12 @@
 export interface Restaurants {
     id: string;
     name: string;
+    district:string;
     type: string;
-    description: string;
+    comments: string;
     rating: number;
+    visited:boolean;
+    opinion:string;
   
 
 }

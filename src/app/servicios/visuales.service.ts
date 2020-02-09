@@ -3,12 +3,16 @@ import { Component } from '@angular/core';
 import { AlertController, ToastController, PopoverController, ModalController } from '@ionic/angular';
 import { AutenticacionesService } from './autenticaciones.service';
 import { ModalPagePage } from '../modal-page/modal-page.page';
+import { ConexionesService } from './conexiones.service';
 @Injectable({
   providedIn: 'root'
 })
 export class VisualesService {
 
-  constructor(public modalController: ModalController,private alert: AlertController, public toastController: ToastController , private aut:AutenticacionesService) { }
+
+  name:string;
+
+  constructor(public modalController: ModalController,private alert: AlertController, public toastController: ToastController , private aut:AutenticacionesService,private conexion:ConexionesService) { }
 
 
   //////////////Toast////////////////////////////////////////
@@ -125,10 +129,14 @@ async presentModalAdd() {
   
 
   });
-  modal.showBackdrop;
-  return await modal.present();
 
-  
+   await modal.present();
+
+  const { data } = await modal.onDidDismiss();
+  console.log(data);
+
+  this.conexion.Add(data);
+
 }
 
 

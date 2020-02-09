@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { VisualesService } from '../servicios/visuales.service';
 import { ModalPagePage } from '../modal-page/modal-page.page';
+import { Restaurants } from '../model/restaurant.interface';
 
 @Component({
   selector: 'app-tab1',
@@ -11,6 +12,10 @@ import { ModalPagePage } from '../modal-page/modal-page.page';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+
+  name:string;
+
+  visitedRestaurants:any;
 
   menuOpen1:boolean=false;
 
@@ -22,6 +27,23 @@ export class Tab1Page {
   }
   ngOnInit(){
     this.menuOpen1=false;
+
+    this.conexion.getRestaurantsList().then((data)=>{
+
+      data.valueChanges().subscribe(
+    
+        res=>{
+
+          this.visitedRestaurants=res;
+
+            res.forEach(element=>{
+            
+            console.log(element);
+            
+            })
+        })
+
+    }).catch();
   }
 
   onClose(){
@@ -51,5 +73,12 @@ export class Tab1Page {
     this.visual.presentModalAdd();
   }
 
+  onClickMark_Visited(restaurant:Restaurants){
+    this.conexion.markNotVisited(restaurant);
+  }
+
+  onClickDelete_restaurant(id){
+    this.conexion.delete(id);
+  }
 
 }

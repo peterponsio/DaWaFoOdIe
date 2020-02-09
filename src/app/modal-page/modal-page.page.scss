@@ -1,4 +1,14 @@
 .modal{
 
-    show-backdrop:true;
+    --width:20em;
+    
+}
+
+*{
+    background: transparent;
+}
+
+ion-modal{
+    width: 10em;
+    height: 10em;
 }

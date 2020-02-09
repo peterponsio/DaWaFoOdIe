@@ -20,7 +20,7 @@ import { from } from 'rxjs';
 import { firebaseConfig } from 'src/environments/environment';
 import { ModalPagePage } from './modal-page/modal-page.page';
 
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -39,7 +39,7 @@ import { ModalPagePage } from './modal-page/modal-page.page';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    
+    FormsModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
    

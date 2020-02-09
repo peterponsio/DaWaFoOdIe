@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { VisualesService } from '../servicios/visuales.service';
+import { ConexionesService } from '../servicios/conexiones.service';
+import { Restaurants } from '../model/restaurant.interface';
 
 @Component({
   selector: 'app-tab2',
@@ -10,8 +13,9 @@ import { MenuController } from '@ionic/angular';
 export class Tab2Page {
 
   menuOpen1:boolean=false;
+  notvisitedRestaurants:any;
 
-  constructor(private ruta: Router,private menu: MenuController) {
+  constructor(private ruta: Router,private menu: MenuController,private visual:VisualesService,private conexion:ConexionesService) {
 
     this.menuOpen1=false;
 
@@ -19,6 +23,25 @@ export class Tab2Page {
   }
   ngOnInit(){
     this.menuOpen1=false;
+
+    this.conexion.getRestaurantsList().then((data)=>{
+
+      data.valueChanges().subscribe(
+    
+        res=>{
+
+          this.notvisitedRestaurants=res;
+
+            res.forEach(element=>{
+            
+            console.log(element);
+            
+            })
+        })
+
+    }).catch();
+    
+
   }
 
   onClose(){
@@ -45,6 +68,20 @@ export class Tab2Page {
 
   onClickInfo(){
     this.ruta.navigateByUrl("restaurant-info");
+  }
+
+  onClickAddRestaurant(){
+    this.visual.presentModalAdd();
+  }
+
+
+  onClickMark_Visited(restaurant:Restaurants){
+    this.conexion.markVisited(restaurant);
+  }
+
+
+  onClickDelete_restaurant(id){
+    this.conexion.delete(id);
   }
 
 }

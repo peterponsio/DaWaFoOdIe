@@ -1,11 +1,60 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>ADD RESTAURANT</ion-title>
+    <ion-icon slot="end" name="close-circle" (click)="onClose()" class="sesion_close"></ion-icon>
   </ion-toolbar>
+ 
 </ion-header>
 
-<ion-content show-backdrop="true" class="modal">
 
-  <p>Texto ramdon</p>
+
+<ion-content fullscreen="false">
+
+ <div>
+
+    
+    <ion-input required placeholder="Restautant Name " [(ngModel)]="name"></ion-input>
+
+    <ion-input  placeholder="District" [(ngModel)]="district"></ion-input>
+
+
+    <ion-item>
+      <ion-label>Restaurant Type</ion-label>
+      <ion-select multiple="false" cancelText="Nah" okText="Okay!" [(ngModel)]="type">
+        <ion-select-option value="Chinese">Chinese</ion-select-option>
+        <ion-select-option value="Hamburguer">Hamburguer</ion-select-option>
+        <ion-select-option value="xcheese">Extra Cheese</ion-select-option>
+        <ion-select-option value="peppers">Green Peppers</ion-select-option>
+        <ion-select-option value="mushrooms">Mushrooms</ion-select-option>
+        <ion-select-option value="onions">Onions</ion-select-option>
+        <ion-select-option value="pepperoni">Pepperoni</ion-select-option>
+        <ion-select-option value="pineapple">Pineapple</ion-select-option>
+        <ion-select-option value="sausage">Sausage</ion-select-option>
+        <ion-select-option value="Spinach">Spinach</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-range dualKnobs="true" min="0" max="100" step="5" snaps="true" pin="true" ticks="true" [(ngModel)]="rango"></ion-range>
+
+    <ion-item>
+      <ion-textarea placeholder="Comments..." [(ngModel)]="comments"></ion-textarea>
+    </ion-item>
+
+   
+    <ion-toggle color="danger" [(ngModel)]="visited" ></ion-toggle>
+   
+
+
+    <ion-item>
+      <ion-textarea placeholder="Opinion...." [(ngModel)]="opinion"></ion-textarea>
+    </ion-item>
+
+
+    <ion-button expand="full" size="large" (click)="onClickAdd()">Add Restaurant</ion-button>
+ </div>
+    
+  
+  
 
 </ion-content>

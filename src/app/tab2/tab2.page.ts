@@ -84,4 +84,9 @@ export class Tab2Page {
     this.conexion.delete(id);
   }
 
+
+  onClickEdit(restaurant:Restaurants){
+    this.visual.presentModalEdit(restaurant);
+  }
+
 }

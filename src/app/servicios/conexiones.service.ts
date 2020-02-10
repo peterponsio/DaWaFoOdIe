@@ -119,16 +119,22 @@ export class ConexionesService {
        
         }
 
-        Edit(restaurant){
+        Edit(restaurant,previous){
+
+          if(restaurant.name!="" && restaurant.type!=""  && restaurant.district!="" && restaurant.comments!="" && restaurant.visited!="" && restaurant.opinion!="" && restaurant.rating!=null){
+            this.addRestaurant.id=restaurant.id;
+            this.addRestaurant.name=restaurant.name;
+            this.addRestaurant.type=restaurant.type;
+            this.addRestaurant.district=restaurant.district;
+            this.addRestaurant.comments=restaurant.comments;
+            this.addRestaurant.visited=restaurant.visited;
+            this.addRestaurant.opinion=restaurant.opinion;
+            this.addRestaurant.rating=restaurant.rating;
+          }else if(restaurant.name==""){
+            this.addRestaurant.name=previous.name;
+          }
         
-          this.addRestaurant.id=restaurant.id;
-          this.addRestaurant.name=restaurant.name;
-          this.addRestaurant.type=restaurant.type;
-          this.addRestaurant.district=restaurant.district;
-          this.addRestaurant.comments=restaurant.comments;
-          this.addRestaurant.visited=restaurant.visited;
-          this.addRestaurant.opinion=restaurant.opinion;
-          this.addRestaurant.rating=restaurant.rating;
+         
 
         this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ restaurant.id).update(this.addRestaurant);
 

@@ -158,7 +158,7 @@ async presentModalEdit(restaurant:Restaurants) {
   const { data } = await modal.onDidDismiss();
   console.log(data);
 
-  this.conexion.Edit(data);
+  this.conexion.Edit(data,restaurant);
 
 }
 

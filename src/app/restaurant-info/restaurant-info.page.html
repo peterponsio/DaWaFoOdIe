@@ -15,4 +15,86 @@
 
 <ion-content>
 
+  <ion-card class="restaurant_img">
+    <img src="./assets/dawafoodie.png" alt="Icon DaWaFoOdIe">
+   </ion-card>
+
+   <ion-card>
+  
+   
+
+    <ion-list>
+    
+       <!-- Multi-line sliding item with icon options on both sides -->
+  
+       
+        
+        
+        <ion-item>
+        
+            <h2>Restaurant Name{{unCO.name}}</h2>
+            
+       
+         
+        </ion-item>
+        <ion-item>
+        
+          
+          <p>District : {{unCO.district}}</p>
+         
+     
+       
+      </ion-item>
+      <ion-item>
+        
+      
+        <p>Restaurant Type: {{unCO.type}}</p>
+     
+   
+     
+    </ion-item>
+    <ion-item>
+        
+      
+      <p>Price between: {{unCO.rating.lower}} - {{unCO.rating.upper}}</p>
+ 
+   
+  </ion-item>
+  <ion-item>
+        
+      
+    <p *ngIf="unCO.visited==true">Visited</p>
+    <p *ngIf="unCO.visited==false">Not Visited</p>
+
+ 
+</ion-item>
+<ion-item>
+        
+      
+  <p>Opinion: {{unCO.opinion}}</p>
+
+
+
+</ion-item>
+
+<ion-item>
+        
+      
+  <p>Commets: {{unCO.comments}}</p>
+
+
+
+</ion-item>
+    
+   
+        
+     
+      
+    </ion-list>
+    
+    
+        
+    
+       </ion-card>
+
 </ion-content>

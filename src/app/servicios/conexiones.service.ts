@@ -34,9 +34,24 @@ export class ConexionesService {
     this.addRestaurant.name=data.name;
     this.addRestaurant.type=data.type;
     this.addRestaurant.district=data.district;
-    this.addRestaurant.comments=data.comments;
-    this.addRestaurant.visited=data.visited;
-    this.addRestaurant.opinion=data.opinion;
+    
+    if(data.visited==undefined){
+      this.addRestaurant.visited=false;
+    }else{
+      this.addRestaurant.visited=true;
+    }
+    if(data.comments == undefined || data.comments == ""){
+      this.addRestaurant.comments="add comments";
+    }else{
+      this.addRestaurant.comments=data.comments;
+    }
+    if(data.opinion == "" || data.opinion == undefined){
+      this.addRestaurant.opinion="add opinion";
+    }else{
+      this.addRestaurant.opinion=data.opinion;
+    }
+    
+    
     this.addRestaurant.rating=data.rating;
 
 
@@ -119,9 +134,11 @@ export class ConexionesService {
        
         }
 
-        Edit(restaurant,previous){
+        Edit(restaurant:Restaurants,previous:Restaurants){
 
-          if(restaurant.name!="" && restaurant.type!=""  && restaurant.district!="" && restaurant.comments!="" && restaurant.visited!="" && restaurant.opinion!="" && restaurant.rating!=null){
+          console.log(previous);
+
+          if(restaurant.name!="" && restaurant.type!=""  && restaurant.district!="" && restaurant.comments!="" && restaurant.visited!=undefined && restaurant.opinion!="" && restaurant.rating!=null){
             this.addRestaurant.id=restaurant.id;
             this.addRestaurant.name=restaurant.name;
             this.addRestaurant.type=restaurant.type;
@@ -130,11 +147,55 @@ export class ConexionesService {
             this.addRestaurant.visited=restaurant.visited;
             this.addRestaurant.opinion=restaurant.opinion;
             this.addRestaurant.rating=restaurant.rating;
-          }else if(restaurant.name==""){
-            this.addRestaurant.name=previous.name;
           }
-        
-         
+          
+           if(restaurant.name==undefined){
+            this.addRestaurant.name=previous.name;
+            console.log("entro");
+          } else{
+            this.addRestaurant.name=restaurant.name;
+          }
+          if(restaurant.type==undefined){
+            this.addRestaurant.type=previous.type;
+          } else{
+            this.addRestaurant.type=restaurant.type;
+
+          }
+          if(restaurant.district==undefined){
+            this.addRestaurant.district=previous.district;
+          } else{
+            this.addRestaurant.district=restaurant.district;
+
+          }
+          if(restaurant.comments==undefined){
+            this.addRestaurant.comments=previous.comments;
+          } else{
+            this.addRestaurant.comments=restaurant.comments;
+          }
+          if(restaurant.visited==undefined){
+            this.addRestaurant.visited=previous.visited;
+
+          }else{
+            this.addRestaurant.visited=restaurant.visited;
+
+          }
+          if(restaurant.opinion==undefined){
+            this.addRestaurant.opinion=previous.opinion;
+
+          }else{
+            this.addRestaurant.opinion=restaurant.opinion;
+
+          }
+
+          if(restaurant.rating==null){
+            this.addRestaurant.rating=previous.rating;
+
+          }else{
+            this.addRestaurant.rating=restaurant.rating;
+
+          }
+       
+          this.addRestaurant.id=restaurant.id;
 
         this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ restaurant.id).update(this.addRestaurant);
 

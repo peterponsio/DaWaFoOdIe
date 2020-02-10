@@ -14,6 +14,17 @@ export class Tab2Page {
 
   menuOpen1:boolean=false;
   notvisitedRestaurants:any;
+  search:string;
+
+  type:string;
+
+  district:string;
+
+  rango:any;
+
+   resultArray:any;
+
+  originalArray:any;
 
   constructor(private ruta: Router,private menu: MenuController,private visual:VisualesService,private conexion:ConexionesService) {
 
@@ -29,6 +40,8 @@ export class Tab2Page {
       data.valueChanges().subscribe(
     
         res=>{
+
+          this.originalArray=res;
 
           this.notvisitedRestaurants=res;
 
@@ -66,8 +79,8 @@ export class Tab2Page {
 
  
 
-  onClickInfo(){
-    this.ruta.navigateByUrl("restaurant-info");
+  onClickInfo(restaurant:Restaurants){
+    this.ruta.navigate(["restaurant-info",{data:JSON.stringify(restaurant)}]);
   }
 
   onClickAddRestaurant(){
@@ -88,5 +101,66 @@ export class Tab2Page {
   onClickEdit(restaurant:Restaurants){
     this.visual.presentModalEdit(restaurant);
   }
+
+  onSearchChange(){
+    console.log(this.search);
+
+    //console.log(this.visitedRestaurants);
+   
+    
+
+      if(this.search==="" || this.search==undefined || this.search.length==0){
+        console.log("entro");
+       this.originalArray=this.notvisitedRestaurants;
+       
+      }
+            
+      if( this.search!==""){
+       
+        this.resultArray = this.originalArray.filter(element => element.name.includes(this.search) || element.type.includes(this.search) || element.district.includes(this.search)  && element.visited==false);
+        this.originalArray=this.resultArray;
+
+       }
+      
+    
+      console.log(this.resultArray);
+      
+  }
+
+  onClickFilters(){
+    
+    this.originalArray=this.notvisitedRestaurants;
+
+    console.log(this.type);
+
+   if(this.type!= undefined){
+        this.resultArray = this.originalArray.filter(element => element.type.includes(this.type) && element.visited==true);
+        this.originalArray=this.resultArray;
+   }
+    if(this.district){
+   
+   
+    this.resultArray = this.originalArray.filter(element => element.district.includes(this.district) && element.visited==true);
+   
+    this.originalArray=this.resultArray;
+   }
+   if(this.rango!=null || this.rango!=undefined){
+    this.resultArray = this.originalArray.filter(element => element.rating.lower>=this.rango.lower && element.rating.upper<=this.rango.upper && element.visited==true);
+    this.originalArray=this.resultArray;
+   }
+   
+   console.log(this.originalArray);
+   this.menu.close("filtros1");
+}
+
+doRefresh(event) {
+ 
+
+  setTimeout(() => {
+   
+    this.originalArray=this.notvisitedRestaurants;
+    event.target.complete();
+  }, 2000);
+}
 
 }

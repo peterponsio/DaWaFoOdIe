@@ -6,7 +6,7 @@
     <ion-icon slot="end" name="close-circle" (click)="onClose()" class="sesion_close"></ion-icon>
   </ion-toolbar>
   <ion-item>
-    <ion-searchbar placeholder="Search Restaurant" inputmode="email" type="decimal" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
+    <ion-searchbar placeholder="Search Restaurant" inputmode="email" type="decimal" (ionChange)="onSearchChange($event)" [debounce]="250" [(ngModel)]="search"></ion-searchbar>
     <ion-icon slot="end" name="options" (click)="onFilter()" class="sesion_close"></ion-icon>
   </ion-item>
 </ion-header>
@@ -14,7 +14,7 @@
 <ion-content>
 
 
-  <ion-menu side="end" type="push" menuId="filtros2" >
+  <ion-menu side="end"  menuId="filtros2" >
     <ion-header>
       <ion-toolbar color="danger">
         <ion-title>More Filters</ion-title>
@@ -22,12 +22,37 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
+        <ion-item >
+
+          <ion-item>
+            <ion-label>Restaurant Type</ion-label>
+            <ion-select multiple="false" cancelText="Nah" okText="Okay!" [(ngModel)]="type">
+              <ion-select-option value="Chinese">Chinese</ion-select-option>
+              <ion-select-option value="Hamburguer">Hamburguer</ion-select-option>
+              <ion-select-option value="Fast Foot">Fast Foot</ion-select-option>
+              <ion-select-option value="Pizza">Pizza</ion-select-option>
+              <ion-select-option value="Backery">Backery</ion-select-option>
+              <ion-select-option value="Vegetarian">Vegetarian Foot</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-item>
+        <ion-item  >
+          <label>Price Rank</label>
+  
+          <ion-range dualKnobs="true" min="0" max="100" step="5" snaps="true" pin="true" ticks="true" [(ngModel)]="rango"></ion-range>
+
+        </ion-item>
+        <ion-item  >
+
+
+          <h4>District</h4>
+          <ion-item><ion-input  placeholder="District" [(ngModel)]="district"></ion-input></ion-item>
+          
+
+        </ion-item>
       </ion-list>
+      <ion-button color="warning" (click)="onClickFilters()">Apply</ion-button>
     </ion-content>
   </ion-menu>
   
@@ -37,20 +62,30 @@
    <img src="./assets/dawafoodie.png" alt="Icon DaWaFoOdIe">
   </ion-card>
 
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-card>
   
    
-
+   
 <ion-list>
 
    <!-- Multi-line sliding item with icon options on both sides -->
-   <ion-item-sliding *ngFor="let restaurant of notvisitedRestaurants; let i=index" >
+   <ion-item-sliding *ngFor="let restaurant of originalArray; let i=index" >
    
     <div *ngIf="restaurant.visited==false">
     <ion-item>
       <ion-icon slot="start" name="close" (click)="onClickDelete_restaurant(restaurant.id)"></ion-icon>
     
-      <ion-label (click)="onClickInfo()">
+      <ion-label (click)="onClickInfo(restaurant)">
         <h2>{{restaurant.name}}</h2>
         <p>{{restaurant.district}}</p>
         <p>{{restaurant.type}}</p>

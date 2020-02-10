@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-restaurant-info',
@@ -8,9 +9,18 @@ import { Router } from '@angular/router';
 })
 export class RestaurantInfoPage implements OnInit {
 
-  constructor(private ruta:Router) { }
+  unCO:any;
+  originalArray:any;
+
+  constructor(private ruta:Router,public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+  this.activatedRoute.params.subscribe(params=>{
+  this.unCO = JSON.parse(params['data']);
+})
+    
+      console.log(this.unCO);
 
   }
 

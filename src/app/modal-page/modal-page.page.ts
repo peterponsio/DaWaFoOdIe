@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Restaurants } from '../model/restaurant.interface';
+import { VisualesService } from '../servicios/visuales.service';
 
 @Component({
   selector: 'app-modal-page',
@@ -19,7 +20,7 @@ export class ModalPagePage implements OnInit {
   opinion:string;
 
 
-  constructor(private modal:ModalController) {
+  constructor(private modal:ModalController,private visual:VisualesService) {
 
     this.name="";
 
@@ -55,15 +56,21 @@ export class ModalPagePage implements OnInit {
 
  async onClickAdd(){
 
-  this.modal.dismiss({
-    name:this.name,
-    district:this.district,
-    type:this.type,
-    comments:this.comments,
-    rating:this.rango,
-    visited:this.visited,
-    opinion:this.opinion
-  });
+  if(this.name=="" || this.district=="" || this.type==undefined || this.rango==undefined){
+      this.visual.presentToast("Fill the fields to continue");
+  }else{
+    this.modal.dismiss({
+      name:this.name,
+      district:this.district,
+      type:this.type,
+      comments:this.comments,
+      rating:this.rango,
+      visited:this.visited,
+      opinion:this.opinion
+    });
+   
+  }
+
  
   
   }

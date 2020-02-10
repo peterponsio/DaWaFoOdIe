@@ -21,17 +21,22 @@ import { firebaseConfig } from 'src/environments/environment';
 import { ModalPagePage } from './modal-page/modal-page.page';
 
 import { FormsModule } from '@angular/forms';
+import { EditModalPage } from './edit-modal/edit-modal.page';
+
+
 
 
 @NgModule({
   declarations: [AppComponent,
   
     ModalPagePage,
+    EditModalPage,
   
   ],
   entryComponents: [
 
     ModalPagePage,
+    EditModalPage,
 
   ],
   imports: [

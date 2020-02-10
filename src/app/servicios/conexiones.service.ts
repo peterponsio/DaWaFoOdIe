@@ -119,5 +119,21 @@ export class ConexionesService {
        
         }
 
+        Edit(restaurant){
+        
+          this.addRestaurant.id=restaurant.id;
+          this.addRestaurant.name=restaurant.name;
+          this.addRestaurant.type=restaurant.type;
+          this.addRestaurant.district=restaurant.district;
+          this.addRestaurant.comments=restaurant.comments;
+          this.addRestaurant.visited=restaurant.visited;
+          this.addRestaurant.opinion=restaurant.opinion;
+          this.addRestaurant.rating=restaurant.rating;
+
+        this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ restaurant.id).update(this.addRestaurant);
+
+        }
+
+
 
 }

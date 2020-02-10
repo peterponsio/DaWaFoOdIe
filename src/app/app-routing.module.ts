@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'modal-page',
     loadChildren: () => import('./modal-page/modal-page.module').then( m => m.ModalPagePageModule)
   },
+  {
+    path: 'edit-modal',
+    loadChildren: () => import('./edit-modal/edit-modal.module').then( m => m.EditModalPageModule)
+  },
 
 
 

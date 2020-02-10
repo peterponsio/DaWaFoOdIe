@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ADD RESTAURANT</ion-title>
+    <ion-title>EDIT RESTAURANT</ion-title>
     <ion-icon slot="end" name="close-circle" (click)="onClose()" class="sesion_close"></ion-icon>
   </ion-toolbar>
  
@@ -12,10 +12,13 @@
 
  <div>
 
-    
-    <ion-input required placeholder="Restautant Name " [(ngModel)]="name"></ion-input>
+  
 
-    <ion-input  placeholder="District" [(ngModel)]="district"></ion-input>
+  <ion-input  hidden [(ngModel)]="id"></ion-input>
+
+    <ion-input required  value="datos" placeholder="Restautant Name " [(ngModel)]="name"></ion-input>
+
+    <ion-input  placeholder="District" value="datos" [(ngModel)]="district"></ion-input>
 
 
     <ion-item>
@@ -47,7 +50,7 @@
     </ion-item>
 
 
-    <ion-button expand="full" size="large" (click)="onClickAdd()">Add Restaurant</ion-button>
+    <ion-button expand="full" size="large" (click)="onClickEdit()">Edit Restaurant</ion-button>
  </div>
     
   

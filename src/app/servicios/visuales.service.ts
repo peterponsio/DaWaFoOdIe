@@ -1,9 +1,12 @@
+import { Restaurants } from './../model/restaurant.interface';
 import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
-import { AlertController, ToastController, PopoverController, ModalController } from '@ionic/angular';
+import { AlertController, ToastController, ModalController } from '@ionic/angular';
 import { AutenticacionesService } from './autenticaciones.service';
 import { ModalPagePage } from '../modal-page/modal-page.page';
+import { EditModalPage } from '../edit-modal/edit-modal.page'
 import { ConexionesService } from './conexiones.service';
+import { from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -115,7 +118,7 @@ async presentModalAdd() {
   const modal = await this.modalController.create({
    
     component: ModalPagePage,
-    
+    cssClass:"modal",
     
     
     componentProps: {
@@ -136,6 +139,26 @@ async presentModalAdd() {
   console.log(data);
 
   this.conexion.Add(data);
+
+}
+
+async presentModalEdit(restaurant:Restaurants) {
+  const modal = await this.modalController.create({
+   
+    component: EditModalPage,
+    componentProps: {
+    'data_id':restaurant.id,
+    },
+    cssClass:"modal",
+  
+  });
+
+   await modal.present();
+
+  const { data } = await modal.onDidDismiss();
+  console.log(data);
+
+  this.conexion.Edit(data);
 
 }
 

@@ -76,9 +76,6 @@ export class LoginPage implements OnInit {
 
               this.ruta.navigateByUrl("/tabs");
 
-              
-
-
             }).catch(error => {
 
               console.log(error);

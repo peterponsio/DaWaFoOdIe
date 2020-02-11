@@ -69,14 +69,14 @@ export class Tab1Page {
     if(this.menuOpen1){
       this.menu.close("filtros1");
       this.menuOpen1=false;
-      console.log(this.menuOpen1);
+    
     }else if(this.menuOpen1==false){
       this.menu.open("filtros1");
       this.menuOpen1=true;
-      console.log(this.menuOpen1);
+    
     }else{
       this.menuOpen1=false;
-      console.log(this.menuOpen1);
+    
     }
   }
 
@@ -102,27 +102,21 @@ export class Tab1Page {
 
 
   onSearchChange(){
-    console.log(this.search);
-
-    //console.log(this.visitedRestaurants);
    
-    
-
+    //console.log(this.visitedRestaurants);
       if(this.search==="" || this.search==undefined || this.search.length==0){
         console.log("entro");
        this.originalArray=this.visitedRestaurants;
        
-      }
-            
+      }    
       if( this.search!==""){
        
         this.resultArray = this.originalArray.filter(element => element.name.includes(this.search) || element.type.includes(this.search) || element.district.includes(this.search) && element.visited==true);
         this.originalArray=this.resultArray;
 
        }
-      
-    
-      console.log(this.resultArray);
+        
+     
       
   }
 
@@ -130,7 +124,7 @@ export class Tab1Page {
     
     this.originalArray=this.visitedRestaurants;
 
-    console.log(this.type);
+   
 
    if(this.type!= undefined){
         this.resultArray = this.originalArray.filter(element => element.type.includes(this.type) && element.visited==true);
@@ -138,17 +132,17 @@ export class Tab1Page {
    }
     if(this.district){
    
-   
     this.resultArray = this.originalArray.filter(element => element.district.includes(this.district) && element.visited==true);
    
     this.originalArray=this.resultArray;
    }
+ 
    if(this.rango!=null || this.rango!=undefined){
     this.resultArray = this.originalArray.filter(element => element.rating.lower>=this.rango.lower && element.rating.upper<=this.rango.upper && element.visited==true);
     this.originalArray=this.resultArray;
    }
    
-   console.log(this.originalArray);
+  
    this.menu.close("filtros1");
 }
 
@@ -158,6 +152,11 @@ doRefresh(event) {
   setTimeout(() => {
     
     this.originalArray=this.visitedRestaurants;
+
+    this.rango=null;
+
+    this.type="";
+
     event.target.complete();
   }, 2000);
 }

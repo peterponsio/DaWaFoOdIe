@@ -5,15 +5,51 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { Restaurants } from './../model/restaurant.interface';
 import { Users } from '../model/user.interface';
-import { AlertController } from '@ionic/angular';
-
-
+import { AlertController, LoadingController } from '@ionic/angular';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import  { finalize } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
+import 'firebase/storage';
+import { from } from 'rxjs';
+import * as firebase from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
 export class ConexionesService {
 
-  constructor(private alertController:AlertController,private aut: AngularFireAuth,private ruta:Router,private fb: Facebook,private db:AngularFirestore) { }
+
+   options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.ALLMEDIA
+  }
+
+  optionsPicker = {
+    // Android only. Max images to be selected, defaults to 15. If this is set to 1, upon
+    // selection of a single image, the plugin will return it.
+    maximumImagesCount: 1,
+    
+    // max width and height to allow the images to be.  Will keep aspect
+    // ratio no matter what.  So if both are 800, the returned image
+    // will be at most 800 pixels wide and 800 pixels tall.  If the width is
+    // 800 and height 0 the image will be 800 pixels wide if the source
+    // is at least that wide.
+    width: 300,
+    height: 300,
+    
+    // quality of resized image, defaults to 100
+    quality: 100,
+
+    // output type, defaults to FILE_URIs.
+    // available options are 
+    // window.imagePicker.OutputType.FILE_URI (0) or 
+    // window.imagePicker.OutputType.BASE64_STRING (1)
+    outputType: 1
+};
+
+  constructor(private camera: Camera,private storage: AngularFireStorage,public loadingController: LoadingController,private alertController:AlertController,private aut: AngularFireAuth,private ruta:Router,private fb: Facebook,private db:AngularFirestore,private imagePicker: ImagePicker) { }
 
 
 
@@ -26,6 +62,7 @@ export class ConexionesService {
     visited:false,
     opinion:"",
     rating: 0,
+    img:"",
   }
 
  async Add(data){
@@ -50,14 +87,9 @@ export class ConexionesService {
     }else{
       this.addRestaurant.opinion=data.opinion;
     }
-    
-    
     this.addRestaurant.rating=data.rating;
+    this.addRestaurant.img=data.img;
 
-
-
-
- 
     this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ this.addRestaurant.id).set(this.addRestaurant);
 
     console.log(this.addRestaurant);
@@ -109,21 +141,21 @@ export class ConexionesService {
       async  delete(id){
         
             const alert =  await this.alertController.create({
-              header: 'Confirm!',
-              message: 'Message <strong>text</strong>!!!',
+              header: 'Delete Restaurant!',
+              message: 'This Restaurant gonna be  <strong>deleted permanently</strong>!!!',
               buttons: [
                 {
                   text: 'Cancel',
                   role: 'cancel',
                   cssClass: 'secondary',
                   handler: (blah) => {
-                    console.log('Confirm Cancel: blah');
+                   
                   }
                 }, {
-                  text: 'Okay',
+                  text: 'Delete!!',
                   handler: () => {
                     this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ id).delete();
-                    console.log('Confirm Okay');
+                   
                   }
                 }
               ]
@@ -147,6 +179,7 @@ export class ConexionesService {
             this.addRestaurant.visited=restaurant.visited;
             this.addRestaurant.opinion=restaurant.opinion;
             this.addRestaurant.rating=restaurant.rating;
+            this.addRestaurant.img=restaurant.img;
           }
           
            if(restaurant.name==undefined){
@@ -196,10 +229,57 @@ export class ConexionesService {
           }
        
           this.addRestaurant.id=restaurant.id;
+          this.addRestaurant.img=previous.img;
 
         this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ restaurant.id).update(this.addRestaurant);
 
         }
+
+
+
+        UploadImG(){
+
+          this.imagePicker.getPictures(this.optionsPicker).then(async (results) => {
+            
+            let base64Image = 'data:image/jpeg;base64,' + results;
+            
+        
+            let ruta = this.db.createId();
+            let route = `/${ruta}`;
+            const fileRef = this.storage.ref(route);
+            const task = fileRef.putString(base64Image, 'data_url');
+            task.snapshotChanges().pipe(
+              finalize(() => {
+                fileRef.getDownloadURL().subscribe(url => {
+                  localStorage.setItem("url",url);
+                });
+              })
+            ).subscribe();
+          }, (err) => {
+            alert(err);
+          });
+        }
+          
+
+        
+            
+        editImG(){
+
+        }
+
+        async presentLoading() {
+          const loading = await this.loadingController.create({
+            message: 'Uploading Photo',
+            duration: 3000
+          });
+          await loading.present();
+      
+          const { role, data } = await loading.onDidDismiss();
+      
+          console.log('Loading dismissed!');
+        }
+      
+        
 
 
 

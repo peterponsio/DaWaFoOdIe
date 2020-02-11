@@ -7,6 +7,6 @@ export interface Restaurants {
     rating: number;
     visited:boolean;
     opinion:string;
-  
+    img:string;
 
 }

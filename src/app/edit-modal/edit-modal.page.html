@@ -16,6 +16,8 @@
 
   <ion-input  hidden [(ngModel)]="id"></ion-input>
 
+  <ion-input  hidden [(ngModel)]="img"></ion-input>
+
     <ion-input required  value="datos" placeholder="Restautant Name " [(ngModel)]="name"></ion-input>
 
     <ion-input  placeholder="District" value="datos" [(ngModel)]="district"></ion-input>
@@ -49,6 +51,7 @@
       <ion-textarea placeholder="Opinion...." [(ngModel)]="opinion"></ion-textarea>
     </ion-item>
 
+    
 
     <ion-button expand="full" size="large" (click)="onClickEdit()">Edit Restaurant</ion-button>
  </div>

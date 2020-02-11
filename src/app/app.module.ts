@@ -5,7 +5,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -15,13 +15,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { Facebook,FacebookLoginResponse} from '@ionic-native/facebook/ngx';
-
+import { AngularFireStorage} from '@angular/fire/storage';
 import { from } from 'rxjs';
 import { firebaseConfig } from 'src/environments/environment';
 import { ModalPagePage } from './modal-page/modal-page.page';
 
 import { FormsModule } from '@angular/forms';
 import { EditModalPage } from './edit-modal/edit-modal.page';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 
 
@@ -47,14 +48,16 @@ import { EditModalPage } from './edit-modal/edit-modal.page';
     FormsModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-   
+  
 
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Facebook,
-    
+    Camera,
+    ImagePicker,
+    AngularFireStorage,
     
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

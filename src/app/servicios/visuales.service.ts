@@ -148,6 +148,7 @@ async presentModalEdit(restaurant:Restaurants) {
     component: EditModalPage,
     componentProps: {
     'data_id':restaurant.id,
+    'img_pre':restaurant.img,
     },
     cssClass:"modal",
   

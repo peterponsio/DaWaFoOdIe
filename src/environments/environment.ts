@@ -19,9 +19,12 @@ export const firebaseConfig = {
   appId: "1:303283153672:web:aa99e210542fee815e9abd",
   measurementId: "G-YN1GC9PREB"
 };
+
 // Initialize Firebase
 
 firebase.initializeApp(firebaseConfig);
+var storage = firebase.storage();
+
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -50,6 +50,15 @@ newUser:Users={
   restaurants:"",
 
  }
+ newUserF:Users={
+
+  id:"",
+  name:"",
+  mail:"",
+  password:"",
+  restaurants:"",
+
+ }
 
   CreateUser(newUserData){
 
@@ -81,16 +90,35 @@ newUser:Users={
    async F_log(){
 
    
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-    .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
-    .catch(e => console.log('Error logging into Facebook', e));
-  
-  
-    this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
-
-    localStorage.setItem("log","done");
+    this.fb.login(['email'])
+    .then((response: FacebookLoginResponse) => {
+      this.onLoginSuccess(response);
+      console.log(response.authResponse.accessToken);
+    }).catch((error) => {
+      console.log(error)
+      
+    });
    
   }
+  
+  onLoginSuccess(res: FacebookLoginResponse) {
+    // const { token, secret } = res;
+    const credential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+    this.aut.auth.signInWithCredential(credential)
+      .then((response) => {
+        console.log(response.user);
+
+        this.newUserF.id=response.user.uid;
+        
+        this.newUserF.mail=response.user.email;
+
+        this.db.doc("/users/"+this.newUserF.id ).set(this.newUserF);
+     
+        localStorage.setItem("user_id",this.newUserF.id);
+
+        this.ruta.navigate(["tabs"]);
+      })
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   async G_log(){

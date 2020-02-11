@@ -10,6 +10,7 @@ import { Restaurants } from '../model/restaurant.interface';
 export class EditModalPage implements OnInit {
 
   data_id;
+  img_pre;
   name:string;
   district:string;
   type:string;
@@ -21,7 +22,8 @@ export class EditModalPage implements OnInit {
   constructor(private modal:ModalController) { }
 
   ngOnInit() {
-    console.log(`${this.data_id}`)
+    console.log(`${this.data_id}`);
+    console.log(`${this.img_pre}`)
 
   }
 
@@ -40,6 +42,7 @@ export class EditModalPage implements OnInit {
     rating: 0,
     visited:false,
     opinion:"",
+    img:"",
 
   }
 
@@ -55,7 +58,8 @@ export class EditModalPage implements OnInit {
     comments:this.comments,
     rating:this.rango,
     visited:this.visited,
-    opinion:this.opinion
+    opinion:this.opinion,
+    img:`${this.img_pre}`,
   });
  
 }

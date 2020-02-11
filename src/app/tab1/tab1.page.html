@@ -85,8 +85,11 @@
     
     <ion-item>
       <ion-icon slot="start" name="close" (click)="onClickDelete_restaurant(restaurant.id)"></ion-icon>
-    
+      <ion-thumbnail slot="start">
+        <ion-img src="{{restaurant.img}}"></ion-img>
+      </ion-thumbnail>
       <ion-label (click)="onClickInfo(restaurant)">
+        
         <h2>{{restaurant.name}}</h2>
         <p>{{restaurant.district}}</p>
         <p>{{restaurant.type}}</p>

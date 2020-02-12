@@ -86,7 +86,8 @@
     <ion-item>
       <ion-icon slot="start" name="close" (click)="onClickDelete_restaurant(restaurant.id)"></ion-icon>
       <ion-thumbnail slot="start">
-        <ion-img src="{{restaurant.img}}"></ion-img>
+        <ion-img src={{restaurant.img}}></ion-img>
+       
       </ion-thumbnail>
       <ion-label (click)="onClickInfo(restaurant)">
         
@@ -112,7 +113,7 @@
       
     </ion-item-options>
 </div>
-    
+<p>{{restaurant.img}}</p>
   </ion-item-sliding>
   
 </ion-list>
@@ -122,6 +123,7 @@
 
    </ion-card>
 
+   
    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="settings"></ion-icon>

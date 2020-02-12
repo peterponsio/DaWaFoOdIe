@@ -21,6 +21,10 @@ export class UserInfoPage implements OnInit {
   constructor(private conexion:ConexionesService,private visual:VisualesService) { }
 
   ngOnInit() {
+    
+    this.email=localStorage.getItem("correo");
+    this.uid=localStorage.getItem("user");
+    this.fecha=localStorage.getItem("fecha");
 
     this.conexion.getUser().then((data)=>{
 
@@ -41,8 +45,6 @@ export class UserInfoPage implements OnInit {
     
   }
 
-  DeleteUser(){
-    this.visual.deleteUser();
-  }
+
 
 }

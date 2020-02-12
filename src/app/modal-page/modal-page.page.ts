@@ -78,7 +78,7 @@ export class ModalPagePage implements OnInit {
       rating:this.rango,
       visited:this.visited,
       opinion:this.opinion,
-      img:JSON.stringify(localStorage.getItem("url")),
+      img:localStorage.getItem("url"),
     });
    
   }

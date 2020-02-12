@@ -87,6 +87,10 @@ export class Tab2Page {
     this.visual.presentModalAdd();
   }
 
+  onClickPerfil(){
+    this.ruta.navigateByUrl("user-info");
+  }
+
 
   onClickMark_Visited(restaurant:Restaurants){
     this.conexion.markVisited(restaurant);

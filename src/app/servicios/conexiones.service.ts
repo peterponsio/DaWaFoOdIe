@@ -1,10 +1,11 @@
+import { Users } from './../model/user.interface';
 import { AngularFirestore,AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { Restaurants } from './../model/restaurant.interface';
-import { Users } from '../model/user.interface';
+
 import { AlertController, LoadingController } from '@ionic/angular';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -105,6 +106,19 @@ export class ConexionesService {
           return userData;
 
         }
+        async getUser(){
+          var user = firebase.auth().currentUser;
+      
+                return user;
+      
+              }
+
+              async getUserData(){
+                let userData:AngularFirestoreCollection=this.db.collection<Users>("/users/");
+            
+                      return userData;
+            
+                    }
 
 
         markVisited(restaurant){
@@ -117,6 +131,7 @@ export class ConexionesService {
           this.addRestaurant.visited=true;
           this.addRestaurant.opinion=restaurant.opinion;
           this.addRestaurant.rating=restaurant.rating;
+          this.addRestaurant.img=restaurant.img;
 
         this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ restaurant.id).update(this.addRestaurant);
 
@@ -132,6 +147,7 @@ export class ConexionesService {
           this.addRestaurant.visited=false;
           this.addRestaurant.opinion=restaurant.opinion;
           this.addRestaurant.rating=restaurant.rating;
+          this.addRestaurant.img=restaurant.img;
 
         this.db.doc("/users/"+ localStorage.getItem("user_id") +"/Restaurant/"+ restaurant.id).update(this.addRestaurant);
 

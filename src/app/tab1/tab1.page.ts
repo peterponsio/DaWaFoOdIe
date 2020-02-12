@@ -53,7 +53,7 @@ export class Tab1Page {
 
             res.forEach(element=>{
             
-            console.log(element);
+            
             
             })
         })
@@ -118,6 +118,10 @@ export class Tab1Page {
         
      
       
+  }
+
+  onClickPerfil(){
+    this.ruta.navigateByUrl("user-info");
   }
 
   onClickFilters(){

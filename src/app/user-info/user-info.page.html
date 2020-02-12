@@ -1,78 +1,35 @@
 <ion-header>
-  <ion-header>
 
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button color="warning" text="" icon="arrow-round-back">
-        </ion-back-button>
-      </ion-buttons>
-      <ion-title>
-        User Info
-      </ion-title>
-      <ion-icon slot="end" name="close-circle" (click)="onClose()" class="sesion_close"></ion-icon>
-    </ion-toolbar>
-   
+    <ion-buttons slot="start">
+      <ion-back-button color="warning" text="" icon="arrow-round-back">
+      </ion-back-button>
+    </ion-buttons>
+  
   </ion-header>
   
-  <ion-content>
+  <ion-content class="main">
   
-    <ion-card class="restaurant_img">
-      
-       
-       
-     </ion-card>
-  
-     <ion-card>
     
-     
-  
-      <ion-list  >
-      
-         <!-- Multi-line sliding item with icon options on both sides -->
-    
-         
-          
-         <ion-item-sliding *ngFor="let restaurant of currentUsers; let i=index" >
-   
-          
-          
-          <ion-item>
-            <ion-icon slot="start" name="close" (click)="onClickDelete_restaurant(restaurant.id)"></ion-icon>
-         
-            <ion-label (click)="onClickInfo(restaurant)">
-              
-              <h2>{{restaurant.name}}</h2>
-              <h2>{{restaurant.mail}}</h2>
-      
-             
-            </ion-label>
-           
+      <ion-card>
+          <ion-card-content>
+            <img class="main_img" src="./assets/dawafoodie.png">
+          </ion-card-content>
+        </ion-card>
+
+        <ion-item>
+          <ion-label>User Mail: {{email}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>User id: {{uid}}</ion-label>
           </ion-item>
-      
-         
-          <ion-item-options side="end">
-            <ion-item-option color="success" (click)="onClickEdit(restaurant)">
-              <ion-icon slot="end" ></ion-icon>
-              Edit
-            </ion-item-option>
-            <ion-item-option color="danger" (click)="onClickMark_Visited(restaurant)">
-             
-              <ion-icon slot="end" ></ion-icon>
-              Not visited
-            </ion-item-option>
-            
-          </ion-item-options>
+          <ion-item>
+              <ion-label>Create Date: {{fecha}}</ion-label>
+            </ion-item>
    
-      
-        </ion-item-sliding>
        
-        
-      </ion-list>
-      
-      
-          
-      
-         </ion-card>
+            <ion-button class="info_text" shape="round" color="warning" (click)="DeleteUser(uid)">Delete this User</ion-button>
+
+  
   
   </ion-content>
   

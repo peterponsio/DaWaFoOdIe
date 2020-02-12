@@ -109,17 +109,14 @@ export class ConexionesService {
         async getUser(){
           var user = firebase.auth().currentUser;
       
+          console.log(user);
+
                 return user;
+
       
               }
 
-              async getUserData(){
-                let userData:AngularFirestoreCollection=this.db.collection<Users>("/users/");
             
-                      return userData;
-            
-                    }
-
 
         markVisited(restaurant){
         

@@ -1,3 +1,4 @@
+import { VisualesService } from './../servicios/visuales.service';
 import { ConexionesService } from './../servicios/conexiones.service';
 import { Component, OnInit } from '@angular/core';
 import { Users } from './../model/user.interface';
@@ -10,31 +11,38 @@ import { Users } from './../model/user.interface';
 })
 export class UserInfoPage implements OnInit {
 
-  currentUsers: any;
+  email:string;
+
+  uid:string;
+ 
+  fecha:string;
  
 
-  constructor(private conexion:ConexionesService) { }
+  constructor(private conexion:ConexionesService,private visual:VisualesService) { }
 
   ngOnInit() {
 
-    this.conexion.getUserData().then((data)=>{
+    this.conexion.getUser().then((data)=>{
 
-      data.valueChanges().subscribe(
-    
-        res=>{
+        var datos=data;
 
-       
-          
-          this.currentUsers=res;
-          
-          console.log(this.currentUsers);
-        })
+        localStorage.setItem("correo",datos.email);
+        localStorage.setItem("user",datos.uid);
+        localStorage.setItem("fecha",datos.metadata.creationTime);
+
+        console.log(datos);
 
     }).catch();
 
 
-   
+    this.email=localStorage.getItem("correo");
+    this.uid=localStorage.getItem("user");
+    this.fecha=localStorage.getItem("fecha");
     
+  }
+
+  DeleteUser(){
+    this.visual.deleteUser();
   }
 
 }
